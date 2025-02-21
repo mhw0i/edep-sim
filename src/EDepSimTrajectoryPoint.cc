@@ -16,6 +16,39 @@
 
 #include <EDepSimLog.hh>
 
+G4String StepStatusToString(G4StepStatus status) {
+    switch (status) {
+        case G4StepStatus::fWorldBoundary:
+            return "fWorldBoundary";
+        // Step reached the world boundary
+        case G4StepStatus::fGeomBoundary:
+            return "fGeomBoundary";
+        // Step defined by a geometry boundary
+        case G4StepStatus::fAtRestDoItProc:
+            return "fAtRestDoItProc";
+        // Step defined by a PreStepDoItVector
+        case G4StepStatus::fAlongStepDoItProc:
+            return "fAlongStepDoItProc";
+        // Step defined by a AlongStepDoItVector
+        case G4StepStatus::fPostStepDoItProc:
+            return "fPostStepDoItProc";
+        // Step defined by a PostStepDoItVector
+        case G4StepStatus::fUserDefinedLimit:
+            return "fUserDefinedLimit";
+        // Step defined by the user Step limit in the logical volume
+        case G4StepStatus::fExclusivelyForcedProc:
+            return "fExclusivelyForcedProc";
+        // Step defined by an exclusively forced PostStepDoIt process
+        case G4StepStatus::fUndefined:
+            return "fUndefined";
+        // Step not defined yet
+
+        // Add other cases as necessary
+        default:
+            return "Unknown Status";
+    }
+}
+
 G4Allocator<EDepSim::TrajectoryPoint> aTrajPointAllocator;
 
 EDepSim::TrajectoryPoint::TrajectoryPoint()
@@ -128,7 +161,7 @@ std::vector<G4AttValue>* EDepSim::TrajectoryPoint::CreateAttValues() const {
 
     values->push_back(G4AttValue("Momentum",
                                  G4BestUnit(fMomentum,"Momentum"),""));
-    values->push_back(G4AttValue("StepStatus",fStepStatus,""));
+    values->push_back(G4AttValue("StepStatus",StepStatusToString(fStepStatus),""));
 
     values->push_back(G4AttValue("PhysVolName",fPhysVolName,""));
 

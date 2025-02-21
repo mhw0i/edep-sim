@@ -183,7 +183,7 @@ G4LogicalVolume *CaptCryostatBuilder::GetPiece(void) {
                            coneMin.data(), coneMax.data()),
             FindMaterial("Air"),
             GetName());
-    logVolume->SetVisAttributes(G4VisAttributes::Invisible);
+    logVolume->SetVisAttributes(G4VisAttributes::GetInvisible());
     
     ////////////////////////////////////////////////////////
     // Define the outer vessel.
