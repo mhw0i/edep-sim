@@ -30,7 +30,7 @@ if [ ${#1} != 0 -a "x${1}" == "xforce" ]; then
 fi
 
 if [ ! -f CMakeCache.txt ]; then
-    cmake -DCMAKE_INSTALL_PREFIX=${EDEP_ROOT}/${EDEP_TARGET} ${EDEP_ROOT}
+    cmake3 -DCMAKE_INSTALL_PREFIX=${EDEP_ROOT}/${EDEP_TARGET} ${EDEP_ROOT}
 fi
 
 make $*
